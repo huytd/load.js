@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <title>load.js</title>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+    <link href="lib/load.css" rel="stylesheet">
+    <script src="lib/load.debug.js">
+    var urls = [
+        'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js',
+        'https://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.js',
+        'https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js',
+        'https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js',
+        'https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.js',
+        'https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js',
+        'https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.js',
+        'https://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.js',
+        'https://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.js',
+        'https://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.js',
+        'https://ajax.googleapis.com/ajax/libs/jquery/1.2/jquery.js'
+    ];
+
+    // green, red, yellow, orange, blue, violet, white
+    function reloadAfterLoad() {
+        setTimeout(function(){
+            window.location = window.location;
+        }, 1000);
+    }
+
+    function reloadPage() {
+        window.location = window.location;
+    }
+
+    function startDefault() {
+        load.all(urls, function(){
+            console.log("DONE!!!");
+            reloadAfterLoad();
+        });
+    }
+
+    function startColor(color, keep) {
+        if (keep) {
+            document.getElementById("note").innerHTML = "Hey! You must <button class='orange' onclick='reloadPage()'>reload</button> page to clear cache before try another button :P";
+        }
+        load.all(color, urls, function(){
+            console.log("DONE!!!");
+            if (!keep) {
+                reloadAfterLoad();
+            }
+        }, keep);
+    }
+    </script>
+    <style>
+    * {
+        font-family: 'PT Sans', sans-serif;
+    }
+
+    body {
+        text-align: center; margin: 0; padding: 0;
+    }
+
+    h1 {
+        font-size: 3.0em;
+        margin: 0; padding: 0;
+        margin-top: 30px;
+    }
+
+    .demo-button {
+        padding: 10px;
+        text-align: center;
+        background: #EFEFEF;
+    }
+
+    .demo-button button {
+        display: inline;
+        padding: 10px; border: none;
+        background: #34495e; color: #FFF;
+        font-size: 1.0em; margin: 5px;
+        padding-left: 20px; padding-right: 20px;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .demo-button button:hover {
+        opacity: 0.9;
+    }
+
+
+    button.green {
+        background: #2ecc71;
+    }
+
+    button.red {
+        background: #e74c3c;
+    }
+
+    button.yellow {
+        background: #f1c40f;
+    }
+
+    button.orange {
+        background: #e67e22;
+    }
+
+    button.blue {
+        background: #3498db;
+    }
+
+    button.violet {
+        background: #9b59b6;
+    }
+
+    button.white {
+        background: #fff;
+        color: #000;
+    }
+
+    pre {
+        width: 50%; margin: 0 auto;
+        text-align: left;
+        background: #EFEFEF;
+        padding: 10px;
+    }
+
+    code {
+        background: #EFEFEF;
+        padding: 5px;
+    }
+
+    a {
+        color: #e74c3c; text-decoration: none;
+    }
+
+    </style>
+</head>
+<body>
+    <h1>load.js</h1>
+    <p>Load Javascript & CSS easily with Youtube-like loading bar with just 4KB!</p>
+    <div class="demo-button">
+        <p><b>Try it now!</b></p>
+        <button class="green" onclick="startDefault()">Default</button>
+        <button class="red" onclick="startColor('red', true)">Red & Keep</button>
+        <button class="yellow" onclick="startColor('yellow')">Yellow</button>
+        <button class="orange" onclick="startColor('orange')">Orange</button>
+        <button class="blue" onclick="startColor('blue')">Blue</button>
+        <button class="violet" onclick="startColor('violet')">Violet</button>
+        <button class="white" onclick="startColor('white')">White</button>
+        <p id="note">Choose your favorite color</p>
+    </div>
+    <h2>What is load.js?</h2>
+    <p><b>load.js</b> is a tiny javascript/css loader written in Javascript (4KB minified code!).<br/>Based on <a target="_blank" href="http://malko.github.io/l.js/">l.js</a>, with awesome Youtube-like loading bar integrated.</p>
+    <h2>Installation</h2>
+    <p>To use <code>load.js</code> in production code, you only need to:</p>
+    <pre>&lt;<font color="#9b59b6">link</font> href=<font color="#e67e22">"lib/load.css"</font> rel=<font color="#e67e22">"stylesheet"</font>&gt;
+&lt;<font color="#9b59b6">script</font> src=<font color="#e67e22">"lib/load.js"</font>&gt;&lt;/<font color="#9b59b6">script</font>&gt;</pre>
+    <p>For debug, you should use <code>load.debug.js</code>:</p>
+    <pre>&lt;<font color="#9b59b6">script</font> src=<font color="#e67e22">"lib/load.debug.js"</font>&gt;&lt;/<font color="#9b59b6">script</font>&gt;</pre>
+    <h2>How to use?</h2>
+    <pre><font color="#95a5a6">// Define your resources list here</font>
+<font color="#9b59b6">var</font> urls = [
+    <font color="#e67e22">"javascript.js"</font>,
+    <font color="#e67e22">"style.css"</font>,
+    <font color="#e67e22">"http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"</font>,
+    <font color="#e67e22">"bootstrap.css"</font>,
+    <font color="#e67e22">"bootstrap.js"</font>
+];
+
+load.all(urls, <font color="#9b59b6">function</font>(){
+    <font color="#95a5a6">// DONE!</font>
+});</pre>
+    <p>Default color, with callback</p>
+    <pre>load.all(urls, <font color="#9b59b6">function</font>(){
+    <font color="#95a5a6">// DONE!</font>
+});</pre>
+    <p>Custom color, available color: green, red, yellow, orange, blue, violet, white</p>
+    <pre>load.all(<font color="#e67e22">"red"</font>, urls, <font color="#9b59b6">function</font>(){
+    <font color="#95a5a6">// DONE!</font>
+});</pre>
+    <p>Keep the loading bar after loaded. Color must be included!</p>
+    <pre>load.all(<font color="#e67e22">"red"</font>, urls, <font color="#9b59b6">function</font>(){
+    <font color="#95a5a6">// DONE!</font>
+}, true);</pre>
+</body>
+</html>
