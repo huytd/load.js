@@ -7,20 +7,20 @@ Based on [l.js](http://malko.github.io/l.js/), with awesome Youtube-like loading
 
 To use load.js in production code, you need to:
 
-```
+```html
 <link href="lib/load.css" rel="stylesheet">
 <script src="lib/load.js"></script>
 ```
 
 For debug, you should use load.debug.js:
 
-```
+```html
 <script src="lib/load.debug.js"></script>
 ```
 
 # How to use?
 
-```
+```javascript
 // Define your resources list here
 var urls = [
 "javascript.js",
@@ -36,21 +36,21 @@ load.all(urls, function(){
 ```
 
 Default color, with callback
-```
+```javascript
 load.all(urls, function(){
     // DONE!
 });
 ```
 
 Custom color, available color: green, red, yellow, orange, blue, violet, white
-```
+```javascript
 load.all("red", urls, function(){
     // DONE!
 });
 ```
 
 Keep the loading bar after loaded. Color must be included!
-```
+```javascript
 load.all("red", urls, function(){
     // DONE!
 }, true);
