@@ -10,7 +10,7 @@
     <title>load.js</title>
     <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
     <link href="lib/load.css" rel="stylesheet">
-    <script src="lib/load.debug.js">
+    <script src="lib/load.js">
     var urls = [
         'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js',
         'https://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.js',
@@ -76,13 +76,13 @@
         background: #EFEFEF;
     }
 
-    .demo-button button {
+    .demo-button button, a.button {
         display: inline;
         padding: 10px; border: none;
         background: #34495e; color: #FFF;
         font-size: 1.0em; margin: 5px;
         padding-left: 20px; padding-right: 20px;
-        cursor: pointer;
+        cursor: pointer; text-transform: uppercase;
         outline: none;
     }
 
@@ -91,11 +91,11 @@
     }
 
 
-    button.green {
+    button.green, a.button.green {
         background: #2ecc71;
     }
 
-    button.red {
+    button.red, a.button.red {
         background: #e74c3c;
     }
 
@@ -154,6 +154,12 @@
     </div>
     <h2>What is load.js?</h2>
     <p><b>load.js</b> is a tiny javascript/css loader written in Javascript (4KB minified code!).<br/>Based on <a target="_blank" href="http://malko.github.io/l.js/">l.js</a>, with awesome Youtube-like loading bar integrated.</p>
+    <div class="demo-button">
+        <p>&nbsp;</p>
+        <a class="button green" href="loadjs.latest.zip">Download</a>
+        <a class="button red" target="_blank" href="http://github.com/huytd/load.js">View on Github</a>
+        <p>&nbsp;</p>
+    </div>
     <h2>Installation</h2>
     <p>To use <code>load.js</code> in production code, you only need to:</p>
     <pre>&lt;<font color="#9b59b6">link</font> href=<font color="#e67e22">"lib/load.css"</font> rel=<font color="#e67e22">"stylesheet"</font>&gt;
@@ -185,5 +191,7 @@ load.all(urls, <font color="#9b59b6">function</font>(){
     <pre>load.all(<font color="#e67e22">"red"</font>, urls, <font color="#9b59b6">function</font>(){
     <font color="#95a5a6">// DONE!</font>
 }, true);</pre>
+    <p>&nbsp;</p>
+    <p>Please find development environment setup for contributors guideline on <a target="_blank" href="http://github.com/huytd/load.js">Github</a> page</p>
 </body>
 </html>
